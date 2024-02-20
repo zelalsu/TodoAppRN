@@ -17,16 +17,29 @@ function TodoList({todos, onToggle, onDelete}) {
           </TouchableOpacity>
 
           {/* Görev metni ve tarih */}
-          <TouchableOpacity onPress={() => onToggle(item.id)}>
+          <TouchableOpacity style={{flex: 1}} onPress={() => onToggle(item.id)}>
             <Text
               numberOfLines={2}
               style={[styles.todoText, item.completed && styles.completed]}>
               {item.text}
             </Text>
+            <View style={styles.rowDate}>
+              <Text style={[item.completed && styles.completed]}>
+                Başlangıç
+              </Text>
+              <Text
+                style={[styles.todoDate, item.completed && styles.completed]}>
+                ({item.startTime})
+              </Text>
+            </View>
 
-            <Text style={[styles.todoDate, item.completed && styles.completed]}>
-              ({item.startTime}) - ({item.endTime})
-            </Text>
+            <View style={styles.rowDate}>
+              <Text style={[item.completed && styles.completed]}>Bitiş</Text>
+              <Text
+                style={[styles.todoDate, item.completed && styles.completed]}>
+                ({item.endTime})
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -74,7 +87,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  row: {flexDirection: 'row', alignItems: 'center'},
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    alignItems: 'center',
+  },
   checkbox: {
     width: 25,
     height: 25,
@@ -110,7 +128,12 @@ const styles = StyleSheet.create({
   todoDate: {
     color: 'gray',
     fontSize: 12,
-    marginTop: 10,
+  },
+  rowDate: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
   },
 });
 
